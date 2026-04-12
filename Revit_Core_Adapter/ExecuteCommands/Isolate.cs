@@ -41,6 +41,11 @@ namespace BH.Revit.Adapter.Core
 
             var elementIds = command?.Targets?.ElementIds();
 
+            if (elementIds.Count == 0)
+            {
+                elementIds = command?.Targets?.Select(x => System.Convert.ToInt64(x)).Cast<object>().ToList().ElementIds();
+            }
+
             if (elementIds == null)
             {
                 BH.Engine.Base.Compute.RecordError("Provided collection of elements to isolate is invalid.");
