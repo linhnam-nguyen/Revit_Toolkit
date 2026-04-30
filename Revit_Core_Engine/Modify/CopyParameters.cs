@@ -60,7 +60,7 @@ namespace BH.Revit.Engine.Core
                 IEnumerable<IParameterLink> typeParameterLinks = parameterMap.ParameterLinks.Where(x => x is ElementTypeParameterLink);
                 if (elementType != null && typeParameterLinks.Count() != 0)
                 {
-                    foreach (Parameter parameter in elementType.ParametersMap)
+                    foreach (Parameter parameter in elementType.Parameters)
                     {
                         RevitParameter bHoMParameter = parameter.ParameterFromRevit(typeParameterLinks, true);
                         if (bHoMParameter != null)
@@ -71,8 +71,8 @@ namespace BH.Revit.Engine.Core
                 parameterLinks = parameterMap.ParameterLinks.Where(x => !(x is ElementTypeParameterLink));
             }
 
-            IEnumerable elementParams = element.ParametersMap;
-            if (((Autodesk.Revit.DB.ParameterMap)elementParams).IsEmpty)
+            IEnumerable elementParams = element.Parameters;
+            if (((Autodesk.Revit.DB.ParameterSet)elementParams).IsEmpty)
                 elementParams = element.Parameters;
 
             foreach (Parameter parameter in elementParams)
